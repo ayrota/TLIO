@@ -1,5 +1,6 @@
 import torch
 
+
 def make_recursive_func(func):
     def wrapper(args, device=None):
         if isinstance(args, list):
@@ -17,7 +18,8 @@ def make_recursive_func(func):
 @make_recursive_func
 def to_device(args, device):
     if isinstance(args, torch.Tensor):
-        return args.to(device)
+        return args.to(device=device, dtype=torch.float32)
+        # return args.to(device)
     elif isinstance(args, str) or isinstance(args, float) or isinstance(args, int):
         return args
     else:
